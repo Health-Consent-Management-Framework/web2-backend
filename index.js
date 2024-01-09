@@ -9,13 +9,15 @@ const userModel = require("./models/user")
 require('dotenv').config()
 
 const app = express()
+const port = process.env.PORT||5000
+
 app.use(express.json())
 app.use(cors())
 app.use(morgan("tiny"))
 app.use(bodyParser.urlencoded({extended:true}))
 
 app.get('/',(req,res,next)=>{
-    req.send("hello world")
+    res.send("hello world")
 })
 
 app.post('/user/login',async(req,res,next)=>{
@@ -137,3 +139,5 @@ app.post('/user/reset',async(req,res,next)=>{
         next(err)
     }
 })
+
+app.listen(port,()=>{console.log("listeining to port ",port)})
